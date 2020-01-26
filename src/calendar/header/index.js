@@ -144,6 +144,8 @@ class CalendarHeader extends Component {
     }
 
     const webProps = Platform.OS === 'web' ? {'aria-level': this.props.webAriaLevel} : {};
+    const weekDaysNameStyle = this.props.weekDaysNameStyle || {};
+
     return (
       <View style={this.props.style}>
         <View style={this.style.header}>
@@ -170,7 +172,7 @@ class CalendarHeader extends Component {
                 allowFontScaling={false}
                 key={idx}
                 accessible={false}
-                style={this.style.dayHeader}
+                style={[this.style.dayHeader, weekDaysNameStyle[idx]]}
                 numberOfLines={1}
                 importantForAccessibility='no'
               >

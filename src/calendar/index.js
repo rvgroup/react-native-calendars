@@ -189,6 +189,7 @@ class Calendar extends Component {
           onLongPress={this.longPressDay}
           date={dateAsObject}
           marking={this.getDateMarking(day)}
+          renderMarker={this.props.renderMarker}
         >
           {date}
         </DayComp>
@@ -282,6 +283,7 @@ class Calendar extends Component {
           webAriaLevel={this.props.webAriaLevel}
           disableArrowLeft={this.props.disableArrowLeft}
           disableArrowRight={this.props.disableArrowRight}
+          weekDaysNameStyle={this.props.weekDaysNameStyle}
         />
         <View style={this.style.monthView}>{weeks}</View>
       </View>);

@@ -44,12 +44,17 @@ class Day extends Component {
     return shouldUpdate(this.props, nextProps, ['state', 'children', 'marking', 'onPress', 'onLongPress']);
   }
 
-  renderDots(marking) {
+  renderDots(marking, render) {
     const baseDotStyle = [this.style.dot, this.style.visibleDot];
     if (marking.dots && Array.isArray(marking.dots) && marking.dots.length > 0) {
       // Filter out dots so that we we process only those items which have key and color property
-      const validDots = marking.dots.filter(d => (d && d.color));
+      //const validDots = marking.dots.filter(d => (d && d.color));
+      const validDots = marking.dots;
       return validDots.map((dot, index) => {
+        if (render) {
+          return render(dot, index, marking);
+        }
+
         return (
           <View key={dot.key ? dot.key : index} style={[baseDotStyle,
             {backgroundColor: marking.selected && dot.selectedDotColor ? dot.selectedDotColor : dot.color}]}/>
@@ -64,7 +69,7 @@ class Day extends Component {
     const textStyle = [this.style.text];
 
     const marking = this.props.marking || {};
-    const dot = this.renderDots(marking);
+    const dot = this.renderDots(marking, this.props.renderMarker);
 
     if (marking.selected) {
       containerStyle.push(this.style.selected);
